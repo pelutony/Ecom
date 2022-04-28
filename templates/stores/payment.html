@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- Intro -->
+<!-- Featured -->
+<section id="featured" class="py-3 my-3">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-5 mx-auto">
+                    <h3 class="text-center">Make Payment for: &#8358; {{order.total}}</h3>
+                    <hr>
+                    <script src="https://js.paystack.co/v1/inline.js"></script>
+                    <div class="d-grid">
+                        <button type="submit" onclick="payWithStack()" class="btn btn-primary" id="paystackbtn">
+                            Make payment
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function payWithStack(){
+        let currency = 'NGN';
+        let plan = '';
+        let ref = '{{order.ref}}'
+        let obj = {
+            key:"{{paystack_public_key}}",
+            email:'{{order.email}}',
+            amount:'{{order.amount_value}}',
+            ref:ref,
+            callback:function(response){
+                window.location.href="{% url 'verify-payment' order.ref %}"
+            }
+        }
+
+        if(Boolean(currency)){
+            obj.currency = currency.toLocaleUpperCase()
+        }
+        if(Boolean(plan)){
+            obj.plan = plan;
+        }
+        let handler = paystackPop.setup(obj);
+        handler.openIframe()
+    }
+</script>
+  
+
+
+{% endblock content %}

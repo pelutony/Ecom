@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<style>
+    input{
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem +2px);
+        padding: .37rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        border-radius: .25rem;
+        transition: border-color .15s ease in out, box-shadow .15s ease-in-out;
+    }
+</style>
+<!-- password -->
+<section id="featured" class="py-4 my-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 mx-auto">
+                <h3>Enter New Password</h3>
+                <p class="lead">
+                    Please enter your new password twice so we can verify you typed it in correctly.
+                </p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary my-3">submit</button>
+                </form>
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+  
+{% endblock content %}

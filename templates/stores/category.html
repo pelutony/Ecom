@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+  
+
+
+<!-- featured  -->
+<section id="featured" class="py-4 my-3">
+    <div class="container">
+        <!-- intro -->
+       <div class="intro mb-5">
+            <h2 class="text-center">
+            <span>&#8668;</span> Category <span>&#8669;</span>
+            </h2>
+       </div>
+       {% if category %}
+       {% for cat in category %}
+       <h1>{{card.title}}</h1>
+       <div class="row">
+            {% for item in cat.product_set.all %}
+        <div class="col-12 col-md-3">
+            <a href="{% url 'singleproduct' item.slug %}">
+                <div class="product">
+                     <img src="{{ item.image.url }}" alt="" class="img-fluid">
+                     <h5>{{item.title}}</h5>
+                     <h6>
+                         {% if item.discount_price %}
+                         &#8358; {{item.discount_price | intcomma}} <del>&#8358; {{item.price | intcomma}}</del>
+                         {% else %}
+                         &#8358;{{item.price | intcomma}}
+                         {% endif %}
+                     </h6>
+                     <div class="stars">
+                         <i class="bi bi-star-fill"></i>
+                         <i class="bi bi-star-fill"></i>
+                         <i class="bi bi-star-fill"></i>
+                         <i class="bi bi-star-fill"></i>
+                         <i class="bi bi-star-half"></i>
+                     </div>
+                     <a href="{% url 'addtocart' item.id %}" class="btn">
+                        ADD TO CART
+                    </a>
+                </div>   
+            </a>
+        </div> 
+        {% endfor %}
+     </div>
+       {% endfor %}
+       {% else %}
+       <p class="lead text-center bg-danger p-3 m3">No Category</p>
+       {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

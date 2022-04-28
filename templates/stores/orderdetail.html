@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<section id="profile" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <h3>Order Detail</h3>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">Order Id: <strong>#ECOMORD{{orders.id}}</strong></li>
+                    <li class="list-group-item">Order Status: <strong>{{orders.order_status}}</strong></li>
+                    <li class="list-group-item">Order Date: <strong>{{orders.created_at| timesince}} ago</strong></li>
+                    <li class="list-group-item">Customer Name: <strong>{{orders.ordered_by}}</strong></li>
+                    <li class="list-group-item">Customer Email: <strong>{{orders.email}}</strong></li>
+                    <li class="list-group-item">Customer Phone: <strong>{{orders.mobile}}</strong></li>
+                    <li class="list-group-item">Customer Address: <strong>{{orders.shipping_address}}</strong></li>
+                </ul>
+                <h4 class="display-4 text-center">Previous Order</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Image</th>
+                            <th>Item</th>
+                            <th>Rate</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if orders %}
+                          {% for order in orders.cart.cartproduct_set.all %}
+                             <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td><img src="{{ order.product.image.url }}" class="img-fluid" alt=""></td>
+                                <td><a href="{% url 'singleproduct' order.product.slug %}" target="_blank">{{order.product.title}}</a></td>
+                                <td>&#8358; {{order.rate}}</td>
+                                <td>{{order.quantity}}</td>
+                                <td>{{order.subtotal}}</td>
+                             </tr>
+                          {% endfor %}
+                          <tr>
+                              <td colspan="5" class="text-end"><h3>Total: &#8358; {{orders.total}}</h3></td>
+                          </tr>
+                        {% else %}
+                             <tr>
+                                 <p class="lead bg-danger p-3">No Order Yet</p>
+                             </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+    </div>
+  </section>
+
+
+
+
+{% endblock content %}

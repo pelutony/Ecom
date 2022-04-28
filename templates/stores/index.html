@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+  
+<!-- swiper banner -->
+<div class="swiper banner">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+          <img src="{% static 'img/slider-1 (1).webp' %}" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img src="{% static 'img/slider-2.webp' %}" alt="">
+
+      </div>
+      <div class="swiper-slide">
+        <img src="{% static 'img/slider-3.webp' %}" alt="">
+
+      </div>
+
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<!-- category  -->
+<section id="featured" class="py-4 my-3">
+    <div class="container">
+        <!-- intro -->
+       <div class="intro mb-5">
+        <h2 class="text-center">
+            <span>&#8668;</span> Category <span>&#8669;</span>
+        </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if category %}
+                {% for cat in category %}
+                    <a href="{% url 'category' %}" class="px-2 mx-2 bg-success p-3">
+                        {{cat.title}}
+                    </a>
+                {% endfor %}
+                {% else %}
+                <p class="lead text-center bg-danger p-3 m-3">No Category/p>
+                {% endif %}
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+<!-- featured  -->
+<section id="featured" class="py-4 my-3">
+    <div class="container">
+        <!-- intro -->
+       <div class="intro mb-5">
+        <h2 class="text-center">
+            <span>&#8668;</span> Products <span>&#8669;</span>
+        </h2>
+       </div>
+       <!-- product list -->
+       <div class="row">
+           {% if show %}
+           {% for item in show %}
+           <div class="col-12 col-md-3">
+                <a href="{% url 'singleproduct' item.slug %}">
+                    <div class="product">
+                        <img src="{{ item.image.url }}" alt="" class="img-fluid">
+                        <h5>{{item.title}}</h5>
+                        <h6>
+                            {% if item.discount_price %}
+                            &#8358; {{item.discount_price | intcomma}} <del>&#8358; {{item.price | intcomma}}</del>
+                            {% else %}
+                            &#8358;{{item.price | intcomma}}
+                            {% endif %}
+                        </h6>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <a href="{% url 'addtocart' item.id %}" class="btn">
+                            ADD TO CART
+                        </a>
+                        
+                    </div>   
+                </a>
+            </div> 
+           {% endfor %}
+           {% else %}
+             <p class="text-center lead bg-danger p-3 m-3">
+                 No Products 
+             </p>
+           {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

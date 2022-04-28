@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <!-- Breadcrumb -->
+    <section id="product" class="py-5 my-5">
+    <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'category' %}">product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{show.title}}></li>
+        </ol>
+    </nav>
+    <hr>
+
+    <!-- single product -->
+    <div class="row">
+        {% if show %}
+        <div class="col-12 col-md-6">
+            <img src="{{ show.image.url }}" class="img-fluid" alt="{{show.title}}">
+        </div>
+        <div class="col-12 col-md-6">
+            <h3>{{show.title}}</h3>  
+            <span>Views <i class="bi bi-eye"></i> {{show.view_count}}</span>
+            <hr>
+            <p class="lead my-3"> <span class="text-danger">Warranty:</span>{{show.warranty}}</p>
+            <p class="lead my-3"><span class="text-danger">Return Policy:</span> {{show.return_policy}}</p>
+            {% if show.discount_price %}
+            <h3>&#8358; {{show.discount_price | intcomma}} <del class="text-danger">&#8358;{{show.price | intcomma}}</del></h3>
+            {% else %}
+            <h3>&#8358; {{show.price | intcomma}}</h3>
+            {% endif %}
+            <p class="lead my-3">
+                {{show.description}}
+            </p>
+
+            <div class="d-grid">
+                <a href="{% url 'addtocart' show.id %}" class="btn btn-dark">Add To Cart</a>
+            </div>
+        </div>
+          
+        {% else %}
+          
+        {% endif %}
+        
+    </div>
+        </div>
+    </section>
+        
+{% endblock content %}
+

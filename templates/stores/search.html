@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section id="product" class="py-5 my-5">
+    <div class="container">
+        <!-- breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Search Result For <span class="text-success">"{{request.GET.keyword}}</span> </li>
+          </ol>
+        </nav>
+        <hr>
+        <!-- search result -->
+        {% if results %}
+            {% for result in results %}
+            <a href="{% url 'singleproduct' result.slug %}">
+                <div class="col-12 col-md-6 my-3">
+                    <img src="{{ result.image.url }}" class="img-fluid" alt="{{result.title}}">
+
+                    <h3>{{result.title}}</h3>
+                    <p class="lead my-3">
+                        {{result.description | truncatewords:20}}
+                    </p>
+                    <div class="d-grid">
+                        <a href="{% url 'addtocart' result.id %}" class="btn btn-dark">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+              
+            {% endfor %}
+          
+        {% else %}
+        <p class="lead bg-danger p-3 m-3 text-white">
+            No search result for <span class="text-white fw-bold">"{{request.GET.keyword}}"</span>
+        </p>
+          
+        {% endif %}
+        
+    </div>
+</section>
+{% endblock content %}

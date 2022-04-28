@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif
+ }
+ a{
+     text-decoration: none;
+    color: black;
+ }
+ a:hover{
+    color: black;
+ }
+
+ .intro{
+     text-align: center;
+ }
+ .intro span, .intro h2{
+    font-size: 3.8rem;
+    font-weight: 300;
+ }
+
+ .navbar .navbar-brand img{
+     width: 80px;
+     border-radius: 50px;
+ }
+
+ /* swipper styling */
+ .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ #jumbo .swiper-slide img {
+    display: block;
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+  }
+
+  /* jumbo */
+  #jumbo #jumb{
+    position: relative;
+
+  }
+  #jumbo #jumb img{
+    max-width: 100%;
+    transition: all 0.3s;
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: scale(1);
+  }
+
+  #jumbo #jumb:hover img {
+    transform: scale(1.1);
+}
+
+/* product list */
+#featured .product{
+    text-align: center;
+    transition: .3s all;
+}
+#featured .product img{
+    transition: .3s all;
+    transform: scale(0.8);
+}
+#featured .product h5{
+    margin: .3rem 0px;
+    font-size: 1rem;
+    line-height: 30px;
+}
+#featured .product h6>del{
+    color: red;
+}
+#featured .product .stars i{
+    color: goldenrod;
+    opacity: 0;
+}
+#featured .product .btn{
+    font-size: smaller;
+    background-color: transparent;
+    border: 1px solid black;
+    opacity: .7;
+    transform: translateY(20px);
+    transition: .3s all;
+    opacity: 0;
+}
+
+#featured .product img:hover {
+    transform: scale(1);
+    border: 2px solid black;
+}
+#featured .product:hover .btn,
+#featured .product:hover .stars i{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* login */
+.wrapper {
+    max-width: 350px;
+    min-height: 500px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff
+}
+
+.logo {
+    width: 80px;
+    margin: auto
+}
+
+.logo img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaa7, -8px -8px 15px #fff
+}
+
+.wrapper .name {
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 1.3px;
+    padding-left: 10px;
+    color: #555
+}
+
+.wrapper .form-field input {
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #666;
+    padding: 10px 15px 10px 10px
+}
+
+.wrapper .form-field {
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff
+}
+
+.wrapper .form-field .fas {
+    color: #555
+}
+
+.wrapper .btn {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    letter-spacing: 1.3px
+}
+
+.wrapper .btn:hover {
+    background-color: #039BE5
+}
+
+.wrapper a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #03A9F4
+}
+
+.wrapper a:hover {
+    color: #039BE5
+}
+
+@media(max-width: 380px) {
+    .wrapper {
+        margin: 30px 20px;
+        padding: 40px 15px 15px 15px
+    }
+}

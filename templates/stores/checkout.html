@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section id="checkout" class="py-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h4 class="display-5 text-center">Item In Cart</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Product Name</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cart %}
+                                {% for item in cart.cartproduct_set.all  %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{item.product.title}}</td>
+                                    <td>&#8358; {{item.rate | intcomma}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td><strong>&#8358;{{item.subtotal | intcomma}}</strong></td>
+                                </tr>
+                                  
+                                {% endfor %}
+                                <tr>
+                                    <th colspan="6">
+                                        <h2>Total : &#8358; {{cart.total | intcomma}}</h2>
+                                    </th>
+                                </tr>
+                              
+                            {% else %}
+                                <tr>
+                                    <p class="lead bg-danger text-white p-3">No Item In Cart</p>
+                                </tr>
+
+                              
+                            {% endif %}
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="d-grid">
+                                            <a href="{% url 'mycart' %}" class="btn btn-outline-success">Back to cart</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h4 class="display-5 text-center">Checkout Form</h4>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-info">Place Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  
+{% endblock content %}

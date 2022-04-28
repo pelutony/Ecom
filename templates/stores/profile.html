@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <!-- Breadcrumb -->
+    <section id="product" class="py-5 my-5">
+    <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><h4>WELCOME : {{request.user.username}}</h4></li>
+        </ol>
+    </nav>
+    <hr>
+
+    <!-- profile -->
+    <div class="row">
+        <div class="col-md-5">
+            <h4 class="display-4 text-center">User Information</h4>
+            <div class="card p-3">
+                <ul class="list-group">
+                    <li class="list-group-item">Name: <strong>{{customer.full_name}}</strong></li>
+                    <li class="list-group-item">Email: <strong>{{customer.user.email}}</strong></li>
+                    <li class="list-group-item">Username: <strong>{{customer.user.username}}</strong></li>
+                    <li class="list-group-item">Address: <strong>{{customer.address}}</strong></li>
+                    <li class="list-group-item">Registered: <strong>{{customer.registered}}</strong></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h4 class="display-4 text-center">
+                <table class="table table-stripped"> </table>
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Order Id</th>
+                        <th>Amount</th>
+                        <th>Ordered Date</th>
+                        <th>Order Status</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if orders %}
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>#ECOMORD_{{order.id}}</td>
+                        <td> &#8358; {{order.total}}</td>
+                        <td>{{order.created_at| timesince}} ago</td>
+                        <td>{{order.order_status}}</td>
+                        <td><a href="{% url 'order-details' order.id %}" class="btn btn-info btn-sm">More <Details></Details></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <p class="lead bg-danger p-3">No Order Yet</p>
+                    </tr>
+                      
+                    {% endif %}
+                    
+                </tbody>
+            </h4>
+
+        </div>
+
+        </div>
+    </section>
+        
+{% endblock content %}
+
